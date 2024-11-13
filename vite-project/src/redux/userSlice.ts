@@ -16,7 +16,7 @@ const initialData: userState = {
     user: null
 }
 
-export const fetchLogin = createAsyncThunk('user/login',
+export const fetchLogin = createAsyncThunk('users/login',
     async (user: LoginDTO, thunkApi) => {
         try {
             const res = await fetch(`http://localhost:1212/users/login`, {
