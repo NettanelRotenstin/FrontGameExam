@@ -2,6 +2,8 @@ import { ActionReducerMapBuilder, createAsyncThunk, createSlice } from "@reduxjs
 import { json } from "react-router-dom"
 import { DataStatus } from "../types/reduxTypes"
 import { IUser, LoginDTO } from "../types/User"
+import { organizasionsEnum } from "../types/organizasionEnum"
+import { areaEnum } from "../types/areaEnum"
 
 interface userState {
     _id?: string
@@ -19,7 +21,7 @@ const initialData: userState = {
 export const fetchLogin = createAsyncThunk('users/login',
     async (user: LoginDTO, thunkApi) => {
         try {
-            const res = await fetch(`http://localhost:1212/users/login`, {
+            const res = await fetch(`http://localhost:1214/users/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "Application/Json"
@@ -41,9 +43,9 @@ export const fetchLogin = createAsyncThunk('users/login',
 
 export const fetchRegister = createAsyncThunk(
     "users/register",
-    async (user: IUser, thunkApi) => {
+    async (user: {username:string,password:string,organizasion:organizasionsEnum,area?:areaEnum}, thunkApi) => {
         try {
-            const res = await fetch("http://localhost:1212/users/register", {
+            const res = await fetch("http://localhost:1214/users/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -53,7 +55,7 @@ export const fetchRegister = createAsyncThunk(
             if (res.status != 200) {
                 thunkApi.rejectWithValue("Can't create new user ,please try again");
             }
-
+            thunkApi.fulfillWithValue(res)
         } catch (err) {
             thunkApi.rejectWithValue(`Cant create new user ,please try again`);
         }
@@ -84,7 +86,7 @@ const userSlice = createSlice({
                 state.error = null
                 state.user = null
             })
-            .addCase(fetchRegister.fulfilled, (state, action) => {
+            .addCase(fetchRegister.fulfilled, (state) => {
                 state.status = DataStatus.SUCCESS
                 state.error = null
                 state.user = null
