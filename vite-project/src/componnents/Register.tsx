@@ -36,28 +36,22 @@ export default function Register() {
                 value={organizasion}
                 onChange={(e) => setorganizasion(e.target.value as organizasionsEnum)}
             >
-                <option value={organizasionsEnum.IDFNorth}>IDF North</option>
-                <option value={organizasionsEnum.IDFSouth}>IDF South</option>
-                <option value={organizasionsEnum.IDFCenter}>IDF Center</option>
-                <option value={organizasionsEnum.IDFWest}>IDF West</option>
+                <option value={organizasionsEnum.IDFCenter}>IDF</option>
                 <option value={organizasionsEnum.Hezbollah}>Hezbollah</option>
                 <option value={organizasionsEnum.Hamas}>Hamas</option>
                 <option value={organizasionsEnum.IRGC}>IRGC</option>
                 <option value={organizasionsEnum.Houthis}>Houthis</option>
             </select>
 
-            {organizasion == organizasionsEnum.IDFCenter ||
-                organizasion == organizasionsEnum.IDFNorth ||
-                organizasion == organizasionsEnum.IDFSouth ||
-                organizasion == organizasionsEnum.IDFWest ?
-                <select value={area}
-                    onChange={(e) => setarea(e.target.value as areaEnum)}>
-                    <option value={areaEnum.North}>North</option>
-                    <option value={areaEnum.South}>South</option>
-                    <option value={areaEnum.Center}>Center</option>
-                    <option value={areaEnum.West}>West</option>
+            {organizasion == organizasionsEnum.IDFCenter ?
+                <select value={organizasion}
+                    onChange={(e) => setorganizasion(e.target.value as organizasionsEnum)}>
+                    <option value={organizasionsEnum.IDFNorth} onClick={()=>setarea(areaEnum.North)}>North</option>
+                    <option value={organizasionsEnum.IDFSouth} onClick={()=>setarea(areaEnum.South)}>South</option>
+                    <option value={organizasionsEnum.IDFCenter} onClick={()=>setarea(areaEnum.Center)}>Center</option>
+                    <option value={organizasionsEnum.IDFWest} onClick={()=>setarea(areaEnum.West)}>West</option>
                 </select> : <div></div>}
-            <button onClick={() => dispatch(fetchRegister({ username, password, organizasion, area }))}>
+            <button onClick={() => {dispatch(fetchRegister({ username, password, organizasion, area }))}}>
                 Register
             </button>
             <q>
