@@ -7,6 +7,7 @@ import { RootState } from "./redux/store";
 import Register from "./componnents/Register";
 import Login from "./componnents/Login";
 import Defence from "./componnents/Defence";
+import Attack from "./componnents/Attack";
 
 export default function App() {
 
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Navigate to={"/login"} />} />
         <Route path="/defence" element={<Defence />} />
+        <Route path="/attacks" element={<Attack />} />
       </Routes>
     </div>
   );
