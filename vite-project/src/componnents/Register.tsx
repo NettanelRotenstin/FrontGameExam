@@ -10,7 +10,7 @@ import { useAppDispatch } from "../redux/store";
 export default function Register() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [organizasion, setorganizasion] = useState<organizasionsEnum>(organizasionsEnum.IDFWest)
+    const [organizasion, setorganizasion] = useState<organizasionsEnum|undefined  >()
     const [area, setarea] = useState(areaEnum.Center)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()

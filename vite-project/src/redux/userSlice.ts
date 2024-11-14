@@ -43,7 +43,7 @@ export const fetchLogin = createAsyncThunk('users/login',
 
 export const fetchRegister = createAsyncThunk(
     "users/register",
-    async (user: {username:string,password:string,organizasion:organizasionsEnum,area?:areaEnum}, thunkApi) => {
+    async (user: {username:string,password:string,organizasion:organizasionsEnum|undefined,area?:areaEnum}, thunkApi) => {
         try {
             const res = await fetch("http://localhost:1214/users/register", {
                 method: "POST",

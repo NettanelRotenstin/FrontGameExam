@@ -33,7 +33,7 @@ export default function Defence() {
 
             Your history:{history.map((h: any) =>
                 <div>
-                    bum name:{h.missile} , success:{h.success}
+                    bum name:{h.missile} , success:true
                 </div>)}
 
         </div>
