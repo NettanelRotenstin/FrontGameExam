@@ -13,10 +13,19 @@ export default function Defence() {
             setmymissiles(data)
         })
     }, []);
+    socket.on('relevantMissiles', (data) => {
+        console.log(43434)
+        setmymissiles(data)
+    })
+    const shutingDefence = (user_id: string | undefined, bumName: string) => {
+        const data = { user_id, bumName }
+        socket.emit('shutingDefence', data)
+    }
     return (
         <div>
             Your weapon:{mymissiles.map((msl: any) =>
                 <div>name:{msl.name} , amount:{msl.amount}
+                    <button onClick={() => shutingDefence(user?._id, msl.name)}>Shut</button>
                 </div>)}
         </div>
     )
