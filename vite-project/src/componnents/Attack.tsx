@@ -42,6 +42,11 @@ export default function Attack() {
                     {msl.amount > 0 ? <button onClick={() => shutingAttack(user?._id, msl.name, areaAttack)}>Shut</button> : <div></div>}
                 </div>)}
 
+                Your history:{historyAttack?.map((h: any) =>
+                <div>
+                    bum name:{h.missile} , success:true
+                </div>)}
+
         </div>
 
     )
