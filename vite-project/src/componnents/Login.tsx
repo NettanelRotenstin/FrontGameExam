@@ -28,7 +28,8 @@ export default function Login() {
 
 
     return (
-        <div>
+        <div className="login">
+            <h1>War simulation</h1>
             <input
                 type="text"
                 placeholder="User name"
@@ -45,7 +46,7 @@ export default function Login() {
                 Login
             </button>
             <q>
-                Don't have an account?<p onClick={() => navigate('/register')}>Click here</p>
+                Dont have an account?<p style={{color:"blue"}} onClick={() => navigate('/register')}>Click here</p>
             </q>
         </div>
     )

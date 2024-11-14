@@ -6,7 +6,7 @@ import { areaEnum } from "../types/areaEnum";
 import { AsyncThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { UnknownAction } from "redux";
 import { useAppDispatch } from "../redux/store";
- 
+
 export default function Register() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -16,10 +16,11 @@ export default function Register() {
     const navigate = useNavigate()
 
 
- 
+
 
     return (
-        <div>
+        <div className="register">
+            <h1>War simulation</h1>
             <input
                 type="text"
                 placeholder="User name"
@@ -32,6 +33,7 @@ export default function Register() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
+            pick organization
             <select
                 value={organizasion}
                 onChange={(e) => setorganizasion(e.target.value as organizasionsEnum)}
@@ -58,10 +60,9 @@ export default function Register() {
                 Register
             </button>
             <q>
-        Already have an account?<p onClick={()=> navigate('/')}>Click here</p>
-      </q> 
+                Already have an account?<p style={{ color: "blue" }} onClick={() => navigate('/')}>Click here</p>
+            </q>
         </div>
     )
 }
 
- 

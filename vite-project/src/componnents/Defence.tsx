@@ -11,6 +11,7 @@ export default function Defence() {
     const [speed, setspeed] = useState<number>()
     const [interceptors, setinterceptors] = useState<any[]>()
     const [timeLeft, settimeLeft] = useState<number>()
+    const [bumNameAttack, setbumNameAttack] = useState('')
     useEffect(() => {
         const data = { user_id: user?._id, area: user?.area }
         socket.emit("iAmConnectedDefence", data);
@@ -25,6 +26,8 @@ export default function Defence() {
     socket.on('attack', async (data) => {
         await setspeed(data.speed)
         await setinterceptors(data.interceptors)
+        await setbumNameAttack(data.bumName)
+        window.alert(`Attack`)
     })
     useEffect(() => {
         settimeLeft(speed! * 60)
@@ -32,7 +35,9 @@ export default function Defence() {
             settimeLeft(timeLeft! - 1)
         }, 1000);
         setinterceptors(interceptors?.filter(interc => interc.speed * 60 > timeLeft!))
+        
     }, [speed])
+
     const shutingDefence = (user_id: string | undefined, bumName: string, area?: areaEnum | undefined) => {
         const data = { user_id, bumName, area }
         socket.emit('shutingDefence', data)
@@ -42,7 +47,8 @@ export default function Defence() {
         <div>
             Your weapon:{mymissiles.map((msl: any) =>
                 <div>name:{msl.name} , amount:{msl.amount}
-                    {msl.amount > 0 ? <button onClick={() => shutingDefence(user?._id, msl.name, user?.area)}>Shut</button> : <div></div>}
+                    {msl.amount > 0 && interceptors?.includes(msl.name) ? <button onClick={() => {
+                        shutingDefence(user?._id, msl.name, user?.area)}}>Shut</button> : <div></div>}
                 </div>)}
 
             Your history:{history.map((h: any) =>
@@ -50,6 +56,10 @@ export default function Defence() {
                     bum name:{h.missile} , success:true
                 </div>)}
 
+            Attacks:{interceptors?.map((i: any) =>
+                <div>
+                    bum on the way:{bumNameAttack} ,time to hit:{timeLeft} ,status:{}
+                </div>)}
         </div>
 
     )

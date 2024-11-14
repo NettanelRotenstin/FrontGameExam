@@ -1,1 +1,27 @@
- 
+
+
+.login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:space-around;
+  margin-top: 10%;
+  border: rgb(144, 135, 154) solid;
+  padding: 5%;
+}
+.login *{
+  padding: 2%;
+}
+
+.register{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:space-around;
+  margin-top: 10%;
+  border: rgb(144, 135, 154) solid;
+  padding: 5%;
+}
+.register *{
+  padding: 2%;
+}
