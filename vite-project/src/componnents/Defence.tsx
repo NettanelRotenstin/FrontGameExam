@@ -27,7 +27,6 @@ export default function Defence() {
         await setspeed(data.speed)
         await setinterceptors(data.interceptors)
         await setbumNameAttack(data.bumName)
-        window.alert(`Attack`)
     })
     useEffect(() => {
         settimeLeft(speed! * 60)
@@ -35,7 +34,7 @@ export default function Defence() {
             settimeLeft(timeLeft! - 1)
         }, 1000);
         setinterceptors(interceptors?.filter(interc => interc.speed * 60 > timeLeft!))
-        
+
     }, [speed])
 
     const shutingDefence = (user_id: string | undefined, bumName: string, area?: areaEnum | undefined) => {
@@ -44,22 +43,40 @@ export default function Defence() {
         socket.emit("iAmConnectedDefence", { user_id, area: user?.area });
     }
     return (
-        <div>
-            Your weapon:{mymissiles.map((msl: any) =>
-                <div>name:{msl.name} , amount:{msl.amount}
-                    {msl.amount > 0 && interceptors?.includes(msl.name) ? <button onClick={() => {
-                        shutingDefence(user?._id, msl.name, user?.area)}}>Shut</button> : <div></div>}
-                </div>)}
+        <div className='defence'>
+            <div className='weapon'>
+                <table>
+                Your weapon:{mymissiles.map((msl: any) =>
+                    <div>name:{msl.name} , amount:{msl.amount}
+                        {msl.amount > 0  ? <button onClick={() => {
+                            shutingDefence(user?._id, msl.name, user?.area)
+                        }}>Shut</button> : <div></div>}
+                    </div>)}
+                    </table>
+            </div>
+            <div className='history'>
+                <table>
+                    Area history:{history.map((h: any) =>
+                        <tr>
+                            <td>
+                                bum name:{h.missile}  success:true
+                            </td>
+                        </tr>)}
+                </table>
+            </div>
 
-            Your history:{history.map((h: any) =>
-                <div>
-                    bum name:{h.missile} , success:true
-                </div>)}
+            <div className='attacks'>
+                <table>
+                <tr>
 
-            Attacks:{interceptors?.map((i: any) =>
-                <div>
-                    bum on the way:{bumNameAttack} ,time to hit:{timeLeft} ,status:{}
-                </div>)}
+                Attacks:{interceptors?.map((i: any) =>
+                
+                    <div>
+                        bum on the way:{bumNameAttack} ,time to hit:{timeLeft} seconds ,status:{ }
+                    </div>)}
+                    </tr>
+                    </table>
+            </div>
         </div>
 
     )

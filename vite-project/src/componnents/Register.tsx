@@ -49,13 +49,14 @@ export default function Register() {
                 organizasion == organizasionsEnum.IDFNorth ||
                 organizasion == organizasionsEnum.IDFSouth ||
                 organizasion == organizasionsEnum.IDFWest ?
+                <p>pick area
                 <select value={area}
                     onChange={(e) => setarea(e.target.value as areaEnum)}>
                     <option value={areaEnum.North}>North</option>
                     <option value={areaEnum.South}>South</option>
                     <option value={areaEnum.Center}>Center</option>
                     <option value={areaEnum.West}>West</option>
-                </select> : <div></div>}
+                </select></p> : <div></div>}
             <button onClick={() => dispatch(fetchRegister({ username, password, organizasion, area }))}>
                 Register
             </button>
